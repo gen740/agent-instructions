@@ -11,12 +11,15 @@ description: C++ のコードを書く・直す・レビューするとき、ま
 - [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) に準拠する（clang-format は `BasedOnStyle: Google`）。ガイドにあることはここに書かない。
 - ただし次の点はガイドと異なる、自分の流儀を優先する:
   - 名前付き関数はすべて trailing return type（`auto f(int x) -> T`）。ラムダの戻り値は推論に任せる。
-  - 関数・メソッドの名前は `lower_case`（ガイドの `PascalCase` ではない）。
   - ヘッダの拡張子は `.hh`、実装は `.cc`。
+  - インクルードガードは `#pragma once`（ガイドの `<PROJECT>_<PATH>_<FILE>_H_` ではない）。
 
 ## 規格と書き方
 - 新規プロジェクトは、Nix で入る最新のコンパイラが対応する最新規格（例: `CMAKE_CXX_STANDARD 26`）で書き、新機能を積極的に使う。`CMAKE_CXX_EXTENSIONS OFF`。
 - テンプレートを使ったジェネリックで modern な書き方を好む。型の制約は concepts / `requires`、分岐は `if constexpr`。
+
+## ビルド
+- ビルドシステムは CMake、ジェネレータは Ninja（`cmake -G Ninja`）を好む。
 
 ## 警告とチェックはすべてエラー
 - コンパイラ: `-Wall -Wextra -Werror -Wformat=2 -Wimplicit-fallthrough`。
@@ -53,8 +56,8 @@ CheckOptions:
   readability-identifier-naming.EnumCase: CamelCase
   readability-identifier-naming.TemplateParameterCase: CamelCase
   readability-identifier-naming.ConceptCase: CamelCase
-  readability-identifier-naming.FunctionCase: lower_case
-  readability-identifier-naming.MethodCase: lower_case
+  readability-identifier-naming.FunctionCase: CamelCase
+  readability-identifier-naming.MethodCase: CamelCase
   readability-identifier-naming.PrivateMemberCase: lower_case
   readability-identifier-naming.PrivateMemberSuffix: '_'
   readability-identifier-naming.ProtectedMemberCase: lower_case
