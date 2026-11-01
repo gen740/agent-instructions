@@ -9,15 +9,13 @@
 |---|---|
 | `instructions.md` | 共通の指示（system.md 相当） |
 | `skills/*/SKILL.md` | 共通の skill |
-| `.github/copilot-instructions.md` | PR 自動レビューの観点 |
 | `.claude-plugin/`, `hooks/`, `scripts/` | ツールごとの読み込み用アダプタ |
 
 ## 変更の流れ
 
 1. エージェントに「今後は〜して」と頼む → skill `update-my-config` に従って PR が出る
-2. GitHub Copilot が PR を自動レビューする
-3. 自分で確認してマージする（`main` への直接 push はルールで禁止）
-4. 各ツールに反映する（下記）
+2. 自分で確認してマージする（`main` への直接 push はルールで禁止）
+3. 各ツールに反映する（下記）
 
 ## ツール別の読み込み方
 
