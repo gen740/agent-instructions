@@ -1,6 +1,6 @@
 {
   "name": "agent-instructions",
-  "description": "Claude Code と Codex で共有する個人設定",
+  "description": "エージェント共通の個人的な指示と skill",
   "owner": {
     "name": "gen"
   },

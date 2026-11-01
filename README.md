@@ -1,33 +1,41 @@
 # agent-instructions
 
-Claude Code と Codex で共有する、個人の好み・指示・skill の正本。
-編集はこのリポジトリだけで行い、各ツールの手元にあるのは取ってきたコピーとして扱う。
+コーディングエージェント共通の、個人的な好み・指示・skill の正本。
+特定のツールやモデルに依存しない内容だけを置き、各ツールの手元にあるのは取ってきたコピーとして扱う。
 
 ## 構成
 
 | パス | 内容 |
 |---|---|
-| `instructions.md` | 共通の好み（system.md 相当） |
+| `instructions.md` | 共通の指示（system.md 相当） |
 | `skills/*/SKILL.md` | 共通の skill |
-| `.claude-plugin/` | Claude Code 用プラグイン + マーケットプレイス定義 |
-| `hooks/hooks.json` | SessionStart で `instructions.md` を読み込ませる |
-| `scripts/link-codex.sh` | Codex 用に `~/.codex` へリンクを張る |
+| `.github/copilot-instructions.md` | PR 自動レビューの観点 |
+| `.claude-plugin/`, `hooks/`, `scripts/` | ツールごとの読み込み用アダプタ |
 
-## Claude Code に入れる
+## 変更の流れ
+
+1. エージェントに「今後は〜して」と頼む → skill `update-my-config` に従って PR が出る
+2. GitHub Copilot が PR を自動レビューする
+3. 自分で確認してマージする（`main` への直接 push はルールで禁止）
+4. 各ツールに反映する（下記）
+
+## ツール別の読み込み方
+
+### Claude Code
 
 ```bash
 claude plugin marketplace add gen740/agent-instructions
 claude plugin install my-prefs@agent-instructions
 ```
 
-更新を反映するときは `.claude-plugin/plugin.json` の `version` を上げて push し、
-`claude plugin marketplace update agent-instructions` を実行する。
+反映: `claude plugin marketplace update agent-instructions`
+（`.claude-plugin/plugin.json` の `version` が上がっている必要がある）
 
-## Codex に入れる
+### Codex
 
 ```bash
-git clone https://github.com/gen740/agent-instructions.git ~/src/agent-instructions
-~/src/agent-instructions/scripts/link-codex.sh
+git clone https://github.com/gen740/agent-instructions.git /work/agent-instructions
+/work/agent-instructions/scripts/link-codex.sh
 ```
 
-更新は `git -C ~/src/agent-instructions pull` だけ（リンクなので再実行不要）。
+反映: `git -C /work/agent-instructions pull`（リンクなので再実行不要）

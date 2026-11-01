@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Codex に agent-instructions を読ませる: ~/.codex/AGENTS.md と ~/.codex/skills/* をこのクローンへのリンクにする
+# Codex 用: ~/.codex/AGENTS.md と ~/.codex/skills/* をこのクローンへのリンクにする
 set -euo pipefail
 
 repo="$(cd "$(dirname "$0")/.." && pwd)"
