@@ -1,6 +1,6 @@
 {
   "name": "my-prefs",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "共通の指示と skill（instructions.md をセッション開始時に読み込む）",
   "author": {
     "name": "gen"
