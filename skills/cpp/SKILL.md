@@ -7,17 +7,16 @@ description: C++ のコードを書く・直す・レビューするとき、ま
 
 既存プロジェクトでは、そのプロジェクトの規格・設定・慣習を優先する。以下は既定の好み。
 
+## スタイル
+- [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) に準拠する（clang-format は `BasedOnStyle: Google`）。ガイドにあることはここに書かない。
+- ただし次の点はガイドと異なる、自分の流儀を優先する:
+  - 名前付き関数はすべて trailing return type（`auto f(int x) -> T`）。ラムダの戻り値は推論に任せる。
+  - 関数・メソッドの名前は `lower_case`（ガイドの `PascalCase` ではない）。
+  - ヘッダの拡張子は `.hh`、実装は `.cc`。
+
 ## 規格と書き方
 - 新規プロジェクトは、Nix で入る最新のコンパイラが対応する最新規格（例: `CMAKE_CXX_STANDARD 26`）で書き、新機能を積極的に使う。`CMAKE_CXX_EXTENSIONS OFF`。
-- テンプレートを使ったジェネリックで modern な書き方を好む。型の制約は SFINAE ではなく concepts / `requires` で書く。分岐は `if constexpr`。
-- 名前付き関数は trailing return type（`auto f(int x) -> T`）。ラムダの戻り値は推論に任せる。
-- 標準ライブラリの modern な機能を優先する: ranges / views、`std::span`、`std::optional`、`std::variant` + `std::visit`、designated initializers、`[[nodiscard]]`、`std::jthread` など。
-- 所有権は `std::unique_ptr` などで表し、生の `new` / `delete` は使わない。
-
-## 命名とファイル
-- 型・concept・テンプレート引数は `CamelCase`。関数・メソッド・変数・メンバは `lower_case`。private / protected メンバは末尾に `_`。
-- ヘッダは `.hh`（`#pragma once`）、実装は `.cc`。
-- フォーマットは clang-format（`BasedOnStyle: Google` をベース）。
+- テンプレートを使ったジェネリックで modern な書き方を好む。型の制約は concepts / `requires`、分岐は `if constexpr`。
 
 ## 警告とチェックはすべてエラー
 - コンパイラ: `-Wall -Wextra -Werror -Wformat=2 -Wimplicit-fallthrough`。
