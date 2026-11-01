@@ -1,0 +1,8 @@
+{
+  "name": "my-prefs",
+  "version": "0.1.0",
+  "description": "個人の好み・指示・skill（instructions.md を毎セッション読み込む）",
+  "author": {
+    "name": "gen"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "agent-instructions",
+  "description": "Claude Code と Codex で共有する個人設定",
+  "owner": {
+    "name": "gen"
+  },
+  "plugins": [
+    {
+      "name": "my-prefs",
+      "source": "./",
+      "description": "個人の好み・指示・skill"
+    }
+  ]
+}
