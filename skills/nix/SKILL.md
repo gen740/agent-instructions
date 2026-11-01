@@ -11,13 +11,13 @@ description: Nix の式（flake.nix、パッケージ定義、開発シェル、
 - 必ず flake を使う。`nix-env -i`、チャンネル、`nix-shell` / `default.nix` だけの構成にはしない。
 - outputs は flake-parts（`flake-parts.lib.mkFlake { inherit inputs; } { ... }`）で書き、システムごとの出力は `perSystem` に置く。
 - 出力が増えたら `flake.nix` に詰め込まず、`./nix/*.nix` に分けて `imports` で読み込む。パッケージは `pkgs.callPackage ./nix/<name>.nix { }` で呼ぶ。
-- 他の flake を inputs に入れるときは、`inputs.<name>.inputs.nixpkgs.follows = "nixpkgs"` で nixpkgs を揃える。
+- inputs に入れた flake が自分の `nixpkgs` input を持つ場合は、`inputs.<name>.inputs.nixpkgs.follows = "nixpkgs"` で揃える。その input を持たない flake には付けない（存在しない input への `follows` を機械的に足さない）。
 - `flake.lock` は手で編集しない。更新は `nix flake update`（必要なら input を指定）で行う。
 - フォーマットは `nixfmt`。`formatter` を出力に用意し、`nix fmt` で整える。
 
-## `let ... in` は必要なときだけ
-- `let` で名前を付けるのは、**複数行にわたる長い式を、複数回使う**ときだけ。
-- 1回しか使わない式は、使う場所に直接書く。短い式は複数回使っても無理に `let` にしない。
+## `let ... in` を乱用しない
+- 一箇所でしか使わない値を、わざわざ `let` に外出ししない。使う場所に直接書く。
+- `let` を使うのは、長い式を複数回使うときや、数段のネストをまとめて読みやすくなるときなど、名前を付ける意味があるとき。
 - 属性セットから取り出すだけなら `inherit (x) a b;` を使う。
 
 ```nix
