@@ -20,6 +20,7 @@ description: C++ のコードを書く・直す・レビューするとき、ま
 
 ## ビルド
 - ビルドシステムは CMake、ジェネレータは Ninja（`cmake -G Ninja`）を好む。
+- ディレクトリ構成は、ルートに `CMakeLists.txt`、公開ヘッダを `include/`、実装を `src/` に置く形を好む。
 
 ## 警告とチェックはすべてエラー
 - コンパイラ: `-Wall -Wextra -Werror -Wformat=2 -Wimplicit-fallthrough`。
