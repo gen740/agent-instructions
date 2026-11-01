@@ -12,7 +12,7 @@ description: C++ のコードを書く・直す・レビューするとき、ま
 - ただし次の点はガイドと異なる、自分の流儀を優先する:
   - 名前付き関数はすべて trailing return type（`auto f(int x) -> T`）。ラムダの戻り値は推論に任せる。
   - ヘッダの拡張子は `.hh`、実装は `.cc`。
-  - インクルードガードは `#pragma once`（ガイドの `<PROJECT>_<PATH>_<FILE>_H_` ではない）。
+  - インクルードガードは `#pragma once`（ガイドの `<PROJECT>_<PATH>_<FILE>_H_` ではない）。`#pragma once` を強制する clang-tidy の check は upstream にないので、`llvm-header-guard` と `portability-avoid-pragma-once` を有効にしないことだけ守る。
 
 ## 規格と書き方
 - 新規プロジェクトは、Nix で入る最新のコンパイラが対応する最新規格（例: `CMAKE_CXX_STANDARD 26`）で書き、新機能を積極的に使う。`CMAKE_CXX_EXTENSIONS OFF`。
@@ -51,18 +51,35 @@ WarningsAsErrors: '*'
 HeaderFilterRegex: '.*'
 FormatStyle: file
 CheckOptions:
+  # 命名は Google C++ Style Guide に合わせる
+  readability-identifier-naming.NamespaceCase: lower_case
   readability-identifier-naming.ClassCase: CamelCase
   readability-identifier-naming.StructCase: CamelCase
   readability-identifier-naming.EnumCase: CamelCase
+  readability-identifier-naming.TypeAliasCase: CamelCase
+  readability-identifier-naming.TypeAliasIgnoredRegexp: '^(.*_type|(const_)?iterator)$'
   readability-identifier-naming.TemplateParameterCase: CamelCase
   readability-identifier-naming.ConceptCase: CamelCase
   readability-identifier-naming.FunctionCase: CamelCase
+  readability-identifier-naming.FunctionIgnoredRegexp: '^(get|swap)$'
   readability-identifier-naming.MethodCase: CamelCase
+  readability-identifier-naming.MethodIgnoredRegexp: '^c?r?(begin|end)$'
+  readability-identifier-naming.VariableCase: lower_case
+  readability-identifier-naming.ParameterCase: lower_case
   readability-identifier-naming.PrivateMemberCase: lower_case
   readability-identifier-naming.PrivateMemberSuffix: '_'
   readability-identifier-naming.ProtectedMemberCase: lower_case
   readability-identifier-naming.ProtectedMemberSuffix: '_'
   readability-identifier-naming.PublicMemberCase: lower_case
+  readability-identifier-naming.ConstexprVariableCase: CamelCase
+  readability-identifier-naming.ConstexprVariablePrefix: k
+  readability-identifier-naming.GlobalConstantCase: CamelCase
+  readability-identifier-naming.GlobalConstantPrefix: k
+  readability-identifier-naming.StaticConstantCase: CamelCase
+  readability-identifier-naming.StaticConstantPrefix: k
+  readability-identifier-naming.EnumConstantCase: CamelCase
+  readability-identifier-naming.EnumConstantPrefix: k
+  readability-identifier-naming.MacroDefinitionCase: UPPER_CASE
   # 名前付き関数は trailing return type、ラムダは推論のまま
   modernize-use-trailing-return-type.TransformLambdas: none
 ```
