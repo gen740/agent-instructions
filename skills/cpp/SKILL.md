@@ -64,7 +64,8 @@ CheckOptions:
   readability-identifier-naming.FunctionCase: CamelCase
   readability-identifier-naming.FunctionIgnoredRegexp: '^(get|swap)$'
   readability-identifier-naming.MethodCase: CamelCase
-  readability-identifier-naming.MethodIgnoredRegexp: '^c?r?(begin|end)$'
+  # アクセサ（count()、set_count()）や begin/end などの snake_case はガイドで許されるので通す
+  readability-identifier-naming.MethodIgnoredRegexp: '^[a-z][a-z0-9_]*$'
   readability-identifier-naming.VariableCase: lower_case
   readability-identifier-naming.ParameterCase: lower_case
   readability-identifier-naming.PrivateMemberCase: lower_case
