@@ -27,7 +27,7 @@ claude plugin install my-prefs@agent-instructions
 ```
 
 反映: `claude plugin marketplace update agent-instructions`
-（`.claude-plugin/plugin.json` の `version` が上がっている必要がある）
+（`version` を固定していないので、コミットごとに更新として扱われる）
 
 ### Codex
 
