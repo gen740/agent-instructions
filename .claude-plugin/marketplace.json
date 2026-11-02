@@ -9,6 +9,20 @@
       "name": "my-prefs",
       "source": "./",
       "description": "個人の好み・指示・skill"
+    },
+    {
+      "name": "nix-lsp",
+      "source": "./plugins/nix-lsp",
+      "description": "Nix の言語サーバー（nixd）。nixd 本体は devShell などで PATH に入れる",
+      "strict": false,
+      "lspServers": {
+        "nixd": {
+          "command": "nixd",
+          "extensionToLanguage": {
+            ".nix": "nix"
+          }
+        }
+      }
     }
   ]
 }

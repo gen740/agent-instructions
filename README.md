@@ -24,6 +24,7 @@
 ```bash
 claude plugin marketplace add gen740/agent-instructions
 claude plugin install my-prefs@agent-instructions
+claude plugin install nix-lsp@agent-instructions  # 任意: Nix の LSP（nixd）
 ```
 
 反映: `claude plugin marketplace update agent-instructions`
