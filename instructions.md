@@ -3,11 +3,21 @@
 特定のツールやモデルに依存しない、エージェント共通の好み・指示の正本。
 各ツールへの読み込み方は README の「ツール別の読み込み方」を参照。
 
-## コミュニケーション
-- 日本語で返答する。コード・コマンド・識別子は原文のまま。
+## Pull Request の言語
 - 別途指定がなければ、Pull Request のタイトル・本文は英語で書く。
 
-## 好みの保存場所
-- 好み・指示・カスタマイズを手元に直接保存しない（エージェント自身のメモリ機能、各ツールの設定ディレクトリなど）。
-- 好みを追加・変更したいと言われたら、このリポジトリ（GitHub 上の gen740/agent-instructions）への Pull Request として提案する。
-  詳しい手順は skill `update-my-config` を参照。
+## GitHub の public リポジトリ
+- public の GitHub リポジトリを新規作成するよう明示的に依頼されたら、作成後にリポジトリ設定で Pull Request の受付を無効にする（`PATCH /repos/{owner}/{repo}` で `has_pull_requests=false`）。タスクごとの明示的な指定を優先する。
+- 作成と設定変更は別の操作なので、設定変更に失敗した場合は、作成済みのリポジトリと未適用の設定を報告する。
+- この既定は新規 public リポジトリだけに適用する。既存リポジトリや private リポジトリには適用せず、Issues・Wiki の設定も変更しない。
+
+## 好み・指示の置き場所
+- ユーザー個人の好みや指示（どのプロジェクトでも効くもの）の正本はこのリポジトリ（GitHub 上の gen740/agent-instructions）。
+  エージェント自身のメモリ機能や、各ツールのユーザー設定（設定ディレクトリ内の指示ファイルなど）には書き込まない。
+  追加・変更は、このリポジトリへの Pull Request として提案する。手順は skill `update-my-config` を参照。
+- プロジェクト固有の指示は、そのプロジェクトのリポジトリ（`.agents` など）に置く。
+
+## ツールとパッケージ
+- グローバルにパッケージをインストールしない（`brew install`、`pip install`、`npm install -g`、`cargo install`、`nix profile install` など）。
+- 一時的に使うだけなら `nix run nixpkgs#<pkg>` や `nix shell nixpkgs#<pkg> -c <cmd>` を使う。
+- プロジェクトで継続的に使うものは、そのプロジェクトの flake の devShell に追加する。

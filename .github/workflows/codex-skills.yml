@@ -1,0 +1,30 @@
+name: Codex skill discovery
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: npm install --global @openai/codex@0.166.0
+      - name: Test links and actual Codex discovery
+        run: |
+          codex --version
+          bash -n scripts/link-codex.sh
+          CODEX_TEST_BINARY="$(command -v codex)" python3 -m unittest discover -s tests -v
