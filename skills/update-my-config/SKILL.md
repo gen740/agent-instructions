@@ -1,11 +1,11 @@
 ---
 name: update-my-config
-description: ユーザーが「今後は〜して」「この好みを覚えて」など、エージェントの振る舞いや好みを追加・変更したいときに使う。手元には保存せず、GitHub 上の gen740/agent-instructions への Pull Request として出す。
+description: ユーザーが「今後は〜して」「この好みを覚えて」など、エージェントの振る舞いや好みを追加・変更したいときに使う。エージェントのメモリ機能や各ツールのユーザー設定には書き込まず、GitHub 上の gen740/agent-instructions への Pull Request として出す。
 ---
 
 # 好みの更新
 
-好みは手元に保存しない。正本は GitHub 上の `gen740/agent-instructions`。
+ユーザー個人の好み・指示の正本は GitHub 上の `gen740/agent-instructions`。エージェントのメモリ機能や各ツールのユーザー設定には書き込まない。
 `main` へ直接 push せず、必ず Pull Request を出す（`main` はルールで保護されている）。
 
 1. 変更内容を短い箇条書きにしてユーザーに確認する。
