@@ -21,3 +21,7 @@
 - グローバルにパッケージをインストールしない（`brew install`、`pip install`、`npm install -g`、`cargo install`、`nix profile install` など）。
 - 一時的に使うだけなら `nix run nixpkgs#<pkg>` や `nix shell nixpkgs#<pkg> -c <cmd>` を使う。
 - プロジェクトで継続的に使うものは、そのプロジェクトの flake の devShell に追加する。
+
+## アプリの動作確認
+- 開発中のアプリを確認のために起動するときは、最前面を奪わない方法で起動する。人が同じマシンで別の作業をしている。macOS なら `open -g` を使い、実行ファイルを直接起動しない。
+- 確認用のビルドには開発用の署名を入れ、同じ署名を使い回す。ビルドごとに署名が変わると、OS が別のアプリとして扱い、キーチェーンなどの許可のダイアログがそのたびに出る。macOS なら ad-hoc 署名にせず、Apple Development の証明書で署名する。
