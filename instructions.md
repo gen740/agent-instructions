@@ -21,3 +21,6 @@
 - グローバルにパッケージをインストールしない（`brew install`、`pip install`、`npm install -g`、`cargo install`、`nix profile install` など）。
 - 一時的に使うだけなら `nix run nixpkgs#<pkg>` や `nix shell nixpkgs#<pkg> -c <cmd>` を使う。
 - プロジェクトで継続的に使うものは、そのプロジェクトの flake の devShell に追加する。
+
+## アプリの動作確認
+- 開発中のアプリを確認のために起動するときは、最前面を奪わない方法で起動する。人が同じマシンで別の作業をしている。macOS なら `open -g` を使い、実行ファイルを直接起動しない。
