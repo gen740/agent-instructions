@@ -9,6 +9,7 @@ description: C++ のコードを書く・直す・レビューするとき、ま
 
 ## スタイル
 - [Google C++ Style Guide](https://google.github.io/styleguide/cppguide.html) に準拠する（clang-format は `BasedOnStyle: Google`）。ガイドにあることはここに書かない。
+- `.clang-format`（中身は `BasedOnStyle: Google` の 1 行）をリポジトリの直下に置く。整形は `nix fmt`（treefmt の `clang-format`）で回す。
 - ただし次の点はガイドと異なる、自分の流儀を優先する:
   - 名前付き関数はすべて trailing return type（`auto f(int x) -> T`）。ラムダの戻り値は推論に任せる。
   - ヘッダの拡張子は `.hh`、実装は `.cc`。

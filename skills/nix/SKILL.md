@@ -13,7 +13,8 @@ description: Nix の式（flake.nix、パッケージ定義、開発シェル、
 - 出力が増えたら `flake.nix` に詰め込まず、`./nix/*.nix` に分けて `imports` で読み込む。パッケージは `pkgs.callPackage ./nix/<name>.nix { }` で呼ぶ。
 - inputs に入れた flake が自分の `nixpkgs` input を持つ場合は、`inputs.<name>.inputs.nixpkgs.follows = "nixpkgs"` で揃える。その input を持たない flake には付けない（存在しない input への `follows` を機械的に足さない）。
 - `flake.lock` は手で編集しない。更新は `nix flake update`（必要なら input を指定）で行う。
-- フォーマットは `nixfmt`。`formatter` を出力に用意し、`nix fmt` で整える。
+- フォーマットは `nix fmt` に集める。`formatter` は treefmt（`pkgs.treefmt.withConfig`）で出力に用意し、Nix は `nixfmt` で整える。
+  - ほかの言語（C/C++ の `clang-format` など）の整形も、同じ treefmt の設定に足す。
 
 ## `let ... in` を乱用しない
 - 一箇所でしか使わない値を、わざわざ `let` に外出ししない。使う場所に直接書く。
